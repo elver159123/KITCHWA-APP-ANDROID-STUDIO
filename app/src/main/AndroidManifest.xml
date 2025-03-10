@@ -13,6 +13,15 @@
         android:theme="@style/Theme.Kitchwa_app"
         tools:targetApi="31">
         <activity
+            android:name=".Usuario"
+            android:exported="false" />
+        <activity
+            android:name=".Registro"
+            android:exported="false" />
+        <activity
+            android:name=".Bienvenida"
+            android:exported="false" />
+        <activity
             android:name=".Seleccion_Idioma"
             android:exported="false" />
         <activity
