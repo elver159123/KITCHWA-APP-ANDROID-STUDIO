@@ -1,45 +1,166 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#bd88e2"
-    android:padding="24dp" >
+    android:background="#ac88be"
+    android:orientation="vertical"
+    android:padding="16dp">
 
-    <FrameLayout
-        android:layout_width="379dp"
-        android:layout_height="265dp"
-        android:layout_marginTop="136dp"
+    <!-- Título -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_view_more_background"
+        android:gravity="center"
+        android:padding="12dp"
+        android:text="KITCHWA APP"
+        android:textColor="#ffffff"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
+        android:layout_margin="8dp"
         android:background="@drawable/input_background"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:elevation="4dp"
+        android:gravity="center"
+        android:marginTop="10dp"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <!-- Sección Izquierda -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="60dp"
+                android:contentDescription="Bandera Español"
+                android:src="@drawable/espa" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="8dp"
+                android:text="Español"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- Línea Divisoria -->
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_margin="8dp"
+            android:background="#000000" />
+
+        <!-- Sección Derecha -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="161dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/card_background"
+                android:hint="Ingresa una palabra"
+                android:padding="12dp"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/button_view_more_background"
+                android:padding="8dp"
+                android:text="Traducir"
+                android:textColor="#FFFFFF" />
+
+            <TextView
+                android:layout_width="127dp"
+                android:layout_height="45dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/card_background"
+                android:paddingTop="9dp"
+                android:text="Traducción"
+                android:textAlignment="center"
+                android:textColor="#606060"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="375dp"
+        android:background="in"
+        android:layout_height="180dp"
+        android:layout_marginStart="10dp">
 
         <FrameLayout
-            android:layout_width="189dp"
-            android:layout_height="match_parent">
+            android:layout_width="188dp"
+            android:layout_height="173dp"
+            android:background="@drawable/input_background"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/imageView2"
-                android:layout_width="157dp"
-                android:layout_height="175dp"
+                android:layout_width="93dp"
+                android:layout_height="84dp"
                 android:layout_gravity="center"
-                app:srcCompat="@drawable/logo" />
+                app:srcCompat="@drawable/escuchar" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="60dp"
+                android:text="Escuchar traduccion"
+                android:textColor="@color/black"/>
         </FrameLayout>
 
         <FrameLayout
-            android:layout_width="182dp"
-            android:layout_height="match_parent"
-            android:layout_marginStart="193dp">
+            android:layout_width="184dp"
+            android:layout_height="172dp"
+            android:background="@drawable/input_background"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="82dp"
+                android:layout_height="91dp"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/escribir" />
 
             <TextView
-                android:id="@+id/textView10"
+                android:id="@+id/textView7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="TextView" />
+                android:layout_gravity="center"
+                android:layout_marginTop="60dp"
+                android:textColor="@color/black"
+                android:text="Mostrar lista de palabras" />
         </FrameLayout>
-    </FrameLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Sección de palabras en español -->
+
+    <!-- Cuadro de traducción -->
+</LinearLayout>
