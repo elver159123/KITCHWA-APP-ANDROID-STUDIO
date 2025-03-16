@@ -29,7 +29,7 @@ class Registro : AppCompatActivity() {
         editTextEmail = findViewById(R.id.etEmail)
         editTextPassword = findViewById(R.id.etPassword)
         buttonRegister = findViewById(R.id.btnRegister)
-        textViewLogin = findViewById(R.id.btnLogin)
+        textViewLogin = findViewById(R.id.Acceder)
         progressBar = findViewById(R.id.progressBar)
 
         // Botón para registrar un nuevo usuario
