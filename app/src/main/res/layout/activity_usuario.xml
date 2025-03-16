@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="#ac88be"
     android:orientation="vertical"
+
     android:padding="16dp">
 
     <!-- Título -->
