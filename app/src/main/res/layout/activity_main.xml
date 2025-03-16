@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="449dp"
-        android:layout_height="317dp"
+        android:layout_width="457dp"
+        android:layout_height="292dp"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -30,7 +30,7 @@
         android:textSize="32dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.231"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -38,22 +38,23 @@
         android:id="@+id/imageView4"
         android:layout_width="167dp"
         android:layout_height="151dp"
+        android:layout_marginTop="56dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
         app:srcCompat="@drawable/logo" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="160dp"
+        android:layout_marginTop="100dp"
         android:text="Iniciar sesion"
         android:textColor="#8f2681"
         android:textSize="40dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintHorizontal_bias="0.553"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
@@ -99,7 +100,6 @@
         android:textColor="#ffffff"
         android:textStyle="bold"
         android:textSize="20dp"
-
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Iniciar Sesion"
@@ -126,7 +126,6 @@
             android:layout_weight="0.5"
             android:background="@drawable/botones_redes_sociales"
             android:drawableEnd="@drawable/facebook"
-
             android:padding="16dp"
             android:text="Facebook"
             android:textColor="#8f2681"
@@ -151,7 +150,7 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Eres nun nuevo usuario? Registrate"
+        android:text="¿Eres nuevo usuario? Regístrate"
         android:textStyle="bold"
         android:textColor="#8f2681"
         android:layout_margin="32dp"
@@ -159,5 +158,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
-
+    <!-- ProgressBar para mostrar durante la autenticación -->
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_centerInParent="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 </androidx.constraintlayout.widget.ConstraintLayout>

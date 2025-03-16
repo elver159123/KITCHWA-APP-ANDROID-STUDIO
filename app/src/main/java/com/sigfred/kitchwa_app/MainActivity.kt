@@ -3,63 +3,104 @@ package com.sigfred.kitchwa_app
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.AuthResult
+import com.google.firebase.auth.FirebaseAuth
 import com.sigfred.kitchwa_app.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var auth: FirebaseAuth
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        // Muestra el splash screen
-        val splashScreen = installSplashScreen()
-
         super.onCreate(savedInstanceState)
-
-        // Configura el binding
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Mantén el splash screen visible hasta que se complete el setup inicial
-        splashScreen.setKeepOnScreenCondition { false }
+        auth = FirebaseAuth.getInstance()
 
-        // Configura los listeners para los botones
+        setupUI()
+    }
+
+    private fun setupUI() {
+        // Botón de inicio de sesión principal
         binding.button.setOnClickListener {
-            handleLogin()
+            loginUser()
         }
 
-        binding.button5.setOnClickListener {
-            // Simula inicio de sesión con Facebook
-            Toast.makeText(this, "Iniciar sesión con Facebook", Toast.LENGTH_SHORT).show()
-        }
-
-        binding.button4.setOnClickListener {
-            // Simula inicio de sesión con Google
-            Toast.makeText(this, "Iniciar sesión con Google", Toast.LENGTH_SHORT).show()
-        }
-
+        // Texto para ir al registro
         binding.textView2.setOnClickListener {
-            // Navega a la pantalla de registro
-            Toast.makeText(this, "Ir a la pantalla de registro", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, Registro::class.java))
+        }
+
+        // Botón de Facebook
+        binding.button5.setOnClickListener {
+            Toast.makeText(this, "Inicio con Facebook", Toast.LENGTH_SHORT).show()
+            // Implementar lógica de Facebook aquí
+        }
+
+        // Botón de Google
+        binding.button4.setOnClickListener {
+            Toast.makeText(this, "Inicio con Google", Toast.LENGTH_SHORT).show()
+            // Implementar lógica de Google aquí
         }
     }
 
-    private fun handleLogin() {
-        val email = binding.editTextText.text.toString()
-        val password = binding.editTextText2.text.toString()
+    private fun loginUser() {
+        val email = binding.editTextText.text.toString().trim()
+        val password = binding.editTextText2.text.toString().trim()
 
-        if (isValidInput(email, password)) {
-            // Simula un inicio de sesión exitoso
+        if (!validateInputs(email, password)) return
+
+        showLoading(true)
+
+        auth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this) { task ->
+                showLoading(false)
+                handleLoginResult(task)
+            }
+    }
+
+    private fun validateInputs(email: String, password: String): Boolean {
+        return when {
+            TextUtils.isEmpty(email) -> {
+                showError("Ingrese su correo")
+                false
+            }
+            TextUtils.isEmpty(password) -> {
+                showError("Ingrese su contraseña")
+                false
+            }
+            else -> true
+        }
+    }
+
+    private fun handleLoginResult(task: Task<AuthResult>) {
+        if (task.isSuccessful) {
+            navigateToUsuario()
             Toast.makeText(this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show()
         } else {
-            // Muestra un mensaje de error
-            Toast.makeText(this, "Por favor, complete todos los campos correctamente", Toast.LENGTH_SHORT).show()
+            showError("Error en la autenticación: ${task.exception?.message}")
         }
     }
 
-    private fun isValidInput(email: String, password: String): Boolean {
-        return !TextUtils.isEmpty(email) && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches() && password.isNotEmpty()
+    private fun showLoading(show: Boolean) {
+        binding.progressBar.visibility = if (show) View.VISIBLE else View.GONE
+    }
+
+    private fun showError(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun navigateToUsuario() {
+        val intent = Intent(this, Usuario::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        }
+        startActivity(intent)
+        finish()
     }
 }

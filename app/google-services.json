@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "44811447992",
+    "project_id": "kitchwa-app",
+    "storage_bucket": "kitchwa-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:44811447992:android:aee9d3873c7e88d2b10e4d",
+        "android_client_info": {
+          "package_name": "com.sigfred.kitchwa_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "44811447992-6og32ucj8govsejmjd8te163r4r3l8rs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sigfred.kitchwa_app",
+            "certificate_hash": "9f721dde88643e1c7b71e1aa3f319144072dab95"
+          }
+        },
+        {
+          "client_id": "44811447992-250e1me6qd0g122cui095st5056gbtlb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVf2oNOopVTcTovlx9CdHETHq2qkakph8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "44811447992-250e1me6qd0g122cui095st5056gbtlb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

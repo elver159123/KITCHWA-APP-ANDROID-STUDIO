@@ -30,8 +30,8 @@
         android:layout_height="50dp"
         android:layout_margin="32dp"
         android:layout_marginTop="32dp"
-        android:background="@drawable/fondo_texto"
-        android:hint="Nombre Completo"
+        android:background="@drawable/input_background"
+        android:hint="  Nombre Completo"
         android:textColor="#000000"
         android:textColorHint="#756c6c"
         app:layout_constraintEnd_toEndOf="parent"
@@ -44,8 +44,8 @@
         android:layout_height="50dp"
         android:layout_margin="32dp"
         android:layout_marginTop="28dp"
-        android:background="@drawable/fondo_texto"
-        android:hint="E-mail"
+        android:background="@drawable/input_background"
+        android:hint="   E-mail"
         android:inputType="textEmailAddress"
         android:textColor="#000000"
         android:textColorHint="#756c6c"
@@ -59,8 +59,8 @@
         android:layout_height="50dp"
         android:layout_margin="32dp"
         android:layout_marginTop="32dp"
-        android:background="@drawable/fondo_texto"
-        android:hint="Contraseña"
+        android:background="@drawable/input_background"
+        android:hint="  Contraseña"
         android:inputType="textPassword"
         android:textColor="#000000"
         android:textColorHint="#756c6c"
@@ -74,14 +74,21 @@
         android:layout_height="50dp"
         android:layout_margin="32dp"
         android:layout_marginTop="32dp"
-        android:background="@drawable/fondo_texto"
-        android:hint="Confirmar Contraseña"
+        android:background="@drawable/input_background"
+        android:hint="  Confirmar Contraseña"
         android:inputType="textPassword"
         android:textColor="#000000"
         android:textColorHint="#756c6c"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/etPassword" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnRegister"
@@ -98,6 +105,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/etConfirmPassword" />
 
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="126dp"
+        android:layout_height="45dp"
+        android:background="@drawable/input_background"
+        android:text="Iniciar Sesion"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnRegister"
+        app:layout_constraintVertical_bias="0.316" />
+
     <ImageView
         android:id="@+id/imageView8"
         android:layout_width="446dp"
@@ -106,15 +126,15 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/top_background"
-        tools:layout_editor_absoluteY="-22dp" />
+        tools:layout_editor_absoluteY="-22dp"
+        tools:ignore="MissingConstraints" />
 
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="223dp"
         android:layout_height="175dp"
-        android:layout_marginTop="280dp"
+        android:layout_marginTop="124dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logo" />
