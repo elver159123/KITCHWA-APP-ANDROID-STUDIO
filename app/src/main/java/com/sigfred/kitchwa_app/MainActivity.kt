@@ -28,13 +28,14 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupUI() {
         // Botón de inicio de sesión principal
-        binding.button.setOnClickListener {
+        binding.btnInciarSesion.setOnClickListener {
             loginUser()
         }
 
         // Texto para ir al registro
-        binding.textView2.setOnClickListener {
+        binding.tvNoCuenta.setOnClickListener {
             startActivity(Intent(this, Registro::class.java))
+
         }
 
         // Botón de Facebook
@@ -58,11 +59,16 @@ class MainActivity : AppCompatActivity() {
 
         showLoading(true)
 
-        auth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this) { task ->
-                showLoading(false)
-                handleLoginResult(task)
+        auth.signInWithEmailAndPassword(email, password).addOnCompleteListener {task->
+            showLoading(false)
+            if (task.isSuccessful) {
+                navigateToUsuario()
+                Toast.makeText(this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show()
+            } else {
+                showError("Error en la autenticación: ${task.exception?.message}")
             }
+        }
+
     }
 
     private fun validateInputs(email: String, password: String): Boolean {
@@ -79,14 +85,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun handleLoginResult(task: Task<AuthResult>) {
-        if (task.isSuccessful) {
-            navigateToUsuario()
-            Toast.makeText(this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show()
-        } else {
-            showError("Error en la autenticación: ${task.exception?.message}")
-        }
-    }
+
 
     private fun showLoading(show: Boolean) {
         binding.progressBar.visibility = if (show) View.VISIBLE else View.GONE

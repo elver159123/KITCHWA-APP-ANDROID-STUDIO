@@ -1,41 +1,79 @@
 {
   "project_info": {
-    "project_number": "44811447992",
-    "project_id": "kitchwa-app",
-    "storage_bucket": "kitchwa-app.firebasestorage.app"
+    "project_number": "1022211586855",
+    "firebase_url": "https://proyectoincorporacion-default-rtdb.firebaseio.com",
+    "project_id": "proyectoincorporacion",
+    "storage_bucket": "proyectoincorporacion.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:44811447992:android:aee9d3873c7e88d2b10e4d",
+        "mobilesdk_app_id": "1:1022211586855:android:5cfe614590205a2c124702",
         "android_client_info": {
-          "package_name": "com.sigfred.kitchwa_app"
+          "package_name": "app.cita.administrarcitas"
         }
       },
       "oauth_client": [
         {
-          "client_id": "44811447992-6og32ucj8govsejmjd8te163r4r3l8rs.apps.googleusercontent.com",
+          "client_id": "1022211586855-m2ku825vqsa8tqjoekapfeeolbop2nth.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.sigfred.kitchwa_app",
-            "certificate_hash": "9f721dde88643e1c7b71e1aa3f319144072dab95"
+            "package_name": "app.cita.administrarcitas",
+            "certificate_hash": "f855450a98ac327654105499940a917ac5b519fe"
           }
         },
         {
-          "client_id": "44811447992-250e1me6qd0g122cui095st5056gbtlb.apps.googleusercontent.com",
+          "client_id": "1022211586855-01tdmfcr9jkvorsh7kccjtjh98ogun5b.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDVf2oNOopVTcTovlx9CdHETHq2qkakph8"
+          "current_key": "AIzaSyCtdrNmwh80pfER1yArNhckGPtY7k8c8Gc"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "44811447992-250e1me6qd0g122cui095st5056gbtlb.apps.googleusercontent.com",
+              "client_id": "1022211586855-01tdmfcr9jkvorsh7kccjtjh98ogun5b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1022211586855:android:e01940786e876f9f124702",
+        "android_client_info": {
+          "package_name": "com.sigfred.kitchwa_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1022211586855-bel9rp2bijruus2hh3hp283rmq8n65v3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sigfred.kitchwa_app",
+            "certificate_hash": "c9c0b45af8577ece47f9db04b29704659f92020d"
+          }
+        },
+        {
+          "client_id": "1022211586855-01tdmfcr9jkvorsh7kccjtjh98ogun5b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtdrNmwh80pfER1yArNhckGPtY7k8c8Gc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1022211586855-01tdmfcr9jkvorsh7kccjtjh98ogun5b.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

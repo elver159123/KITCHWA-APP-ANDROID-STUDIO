@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#ac88be"
     android:orientation="vertical"
-
+    android:id="@+id/main"
     android:padding="16dp">
 
     <!-- Título -->
@@ -29,7 +29,6 @@
         android:background="@drawable/input_background"
         android:elevation="4dp"
         android:gravity="center"
-        android:layout_marginTop="10dp"
         android:orientation="horizontal"
         android:padding="16dp">
 
@@ -77,7 +76,6 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/card_background"
                 android:hint="Ingresa una palabra"
-                android:minHeight="48dp"
                 android:padding="12dp"
                 android:textColor="#000000"
                 android:textSize="16sp" />
