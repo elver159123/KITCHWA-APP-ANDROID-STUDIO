@@ -1,84 +1,141 @@
 package com.sigfred.kitchwa_app
 
-import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.os.Bundle
-import android.text.TextUtils
-import android.view.View
-import android.widget.Button
+import android.util.Patterns
 import android.widget.EditText
-import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.auth.FirebaseAuth
-import com.google.android.material.textfield.TextInputEditText
-import com.sigfred.kitchwa_app.R
-import com.sigfred.kitchwa_app.databinding.ActivityRegistroBinding
-import com.sigfred.kitchwa_app.model.User
+import com.google.firebase.auth.UserProfileChangeRequest
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class Registro : AppCompatActivity() {
 
-    private lateinit var mAuth: FirebaseAuth
-    private lateinit var binding: ActivityRegistroBinding
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityRegistroBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        enableEdgeToEdge()
+        setContentView(R.layout.activity_registro)
+        auth = Firebase.auth
 
-        mAuth = FirebaseAuth.getInstance()
+        // Obtener referencias de las vistas
+        val etName = findViewById<EditText>(R.id.etName)
+        val etEmail = findViewById<EditText>(R.id.etEmail)
+        val etPassword = findViewById<EditText>(R.id.etPassword)
+        val etConfirmPassword = findViewById<EditText>(R.id.etConfirmPassword)
+        val btnRegister = findViewById<AppCompatButton>(R.id.btnRegister)
+        val tvLoginLink = findViewById<TextView>(R.id.tvLoginLink)
 
-
-        // Botón para registrar un nuevo usuario
-        binding.btnRegister.setOnClickListener {
-
-            crearCuenta()
-
+        // Listener para el enlace "Acceder"
+        tvLoginLink.setOnClickListener {
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
         }
 
+        // Listener para el botón de registro
+        btnRegister.setOnClickListener {
+            val name = etName.text.toString().trim()
+            val email = etEmail.text.toString().trim()
+            val password = etPassword.text.toString().trim()
+            val confirmPassword = etConfirmPassword.text.toString().trim()
 
+            if (!validarCampos(name, email, password, confirmPassword)) return@setOnClickListener
+
+            registrarUsuario(name, email, password)
+        }
+
+        // Manejador de márgenes del sistema
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
     }
 
-    private fun crearCuenta() {
-        validarUsuario()?.let {
-            binding.progressBar.visibility = View.VISIBLE
-            mAuth.createUserWithEmailAndPassword(it.email, it.password)
-                .addOnSuccessListener { task ->
-                    binding.progressBar.visibility = View.GONE
-                        Toast.makeText(this, "Registro exitoso", Toast.LENGTH_SHORT).show()
-                        navegarNuevaPantalla(it.email)
-                }.addOnFailureListener {
-                    Toast.makeText(this, "Error ${it.message}", Toast.LENGTH_SHORT).show()
-                    println("error al registrar "+it.message)
+    private fun validarCampos(
+        name: String,
+        email: String,
+        password: String,
+        confirmPassword: String
+    ): Boolean {
+        return when {
+            name.isEmpty() -> {
+                findViewById<EditText>(R.id.etName).error = "Nombre requerido"
+                false
+            }
+            email.isEmpty() -> {
+                findViewById<EditText>(R.id.etEmail).error = "Email requerido"
+                false
+            }
+            !Patterns.EMAIL_ADDRESS.matcher(email).matches() -> {
+                findViewById<EditText>(R.id.etEmail).error = "Email no válido"
+                false
+            }
+            password.isEmpty() -> {
+                findViewById<EditText>(R.id.etPassword).error = "Contraseña requerida"
+                false
+            }
+            password.length < 6 -> {
+                findViewById<EditText>(R.id.etPassword).error = "La contraseña debe tener al menos 6 caracteres"
+                false
+            }
+            password != confirmPassword -> {
+                findViewById<EditText>(R.id.etConfirmPassword).error = "Las contraseñas no coinciden"
+                false
+            }
+            else -> true
+        }
+    }
+
+    private fun registrarUsuario(name: String, email: String, password: String) {
+        auth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    actualizarPerfilUsuario(name)
+                } else {
+                    mostrarErrorRegistro(task.exception?.message)
                 }
+            }
+    }
+
+    private fun actualizarPerfilUsuario(name: String) {
+        val user = auth.currentUser
+        val profileUpdates = UserProfileChangeRequest.Builder()
+            .setDisplayName(name)
+            .build()
+
+        user?.updateProfile(profileUpdates)?.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                redirigirAUsuarioActivity()
+            } else {
+                Toast.makeText(
+                    this,
+                    "Error al actualizar el perfil: ${task.exception?.message}",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
     }
 
-    private fun navegarNuevaPantalla(email: String) {
-        // Devolver email al Login
-        val resultIntent = Intent()
-        resultIntent.putExtra("EMAIL", email)
-        setResult(RESULT_OK, resultIntent)
-        finish()  // Cerrar la actividad y volver a Login
+    private fun redirigirAUsuarioActivity() {
+        Toast.makeText(this, "¡Registro exitoso!", Toast.LENGTH_SHORT).show()
+        startActivity(Intent(this, Usuario::class.java))
+        finish()
     }
 
-    private fun validarUsuario(): User? {
-        val email = binding.etEmail.text.toString().trim()
-        val password = binding.etPassword.text.toString().trim()
-        val nombre = binding.etName.text.toString().trim()
-
-        if (TextUtils.isEmpty(email)) {
-            Toast.makeText(this, "Ingrese su correo", Toast.LENGTH_SHORT).show()
-            return null
-        } else if (TextUtils.isEmpty(password)) {
-            Toast.makeText(this, "Ingrese su contraseña", Toast.LENGTH_SHORT).show()
-            return null
-        } else if (TextUtils.isEmpty(nombre)) {
-            Toast.makeText(this, "Ingrese su nombre", Toast.LENGTH_SHORT).show()
-            return null
-        } else {
-            return User(nombre, email, password)
-        }
+    private fun mostrarErrorRegistro(mensajeError: String?) {
+        Toast.makeText(
+            this,
+            "Error en el registro: ${mensajeError ?: "Error desconocido"}",
+            Toast.LENGTH_LONG
+        ).show()
     }
 }

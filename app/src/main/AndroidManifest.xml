@@ -17,6 +17,7 @@
         android:theme="@style/Theme.Kitchwa_app"
         tools:targetApi="31">
 
+        <!-- Actividad de Bienvenida (LAUNCHER) -->
         <activity
             android:name=".Bienvenida"
             android:exported="true"
@@ -27,6 +28,7 @@
             </intent-filter>
         </activity>
 
+        <!-- Otras actividades -->
         <activity
             android:name=".MainActivity"
             android:exported="false"
@@ -41,15 +43,6 @@
             android:name=".Usuario"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-
-        <service
-            android:name="com.google.firebase.components.ComponentDiscoveryService"
-            android:exported="false"
-            tools:ignore="ExportedService">
-            <meta-data
-                android:name="com.google.firebase.components:com.google.firebase.auth.FirebaseAuthRegistrar"
-                android:value="com.google.firebase.components.ComponentRegistrar" />
-        </service>
 
     </application>
 
