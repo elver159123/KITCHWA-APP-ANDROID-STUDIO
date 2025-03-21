@@ -3,6 +3,8 @@ package com.sigfred.kitchwa_app
 import android.media.AudioAttributes
 import android.media.MediaPlayer
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -29,6 +31,7 @@ class Usuario : AppCompatActivity() {
     private lateinit var btnEscuchar: Button
 
     private var mediaPlayer: MediaPlayer? = null
+    private val handler = Handler(Looper.getMainLooper())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -135,35 +138,67 @@ class Usuario : AppCompatActivity() {
     }
 
     private fun reproducirDesdeUrl(url: String) {
-        mediaPlayer?.release()
-        mediaPlayer = null
+        releaseMediaPlayer()
 
         mediaPlayer = MediaPlayer().apply {
             try {
-                setDataSource(url)
+                if (url.isEmpty() || !url.startsWith("http")) {
+                    tvTranslation.text = "URL inválida"
+                    return@apply
+                }
+
                 setAudioAttributes(
                     AudioAttributes.Builder()
                         .setUsage(AudioAttributes.USAGE_MEDIA)
                         .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
                         .build()
                 )
+
                 setOnPreparedListener { mp ->
+                    handler.removeCallbacksAndMessages(null)
+                    tvTranslation.text = "Reproduciendo..."
                     mp.start()
-                    tvTranslation.text = "Reproduciendo audio..."
                 }
-                setOnCompletionListener {
-                    tvTranslation.text = "Audio completado"
-                }
+
                 setOnErrorListener { _, what, extra ->
-                    Log.e("AUDIO", "Error: what=$what, extra=$extra")
-                    tvTranslation.text = "Error al reproducir audio"
-                    false
+                    handler.removeCallbacksAndMessages(null)
+                    Log.e("AUDIO", "Error: $what/$extra")
+                    tvTranslation.text = "Error de audio ($what/$extra)"
+                    releaseMediaPlayer()
+                    true
                 }
+
+                setOnCompletionListener {
+                    handler.removeCallbacksAndMessages(null)
+                    tvTranslation.text = "Reproducción completada"
+                    releaseMediaPlayer()
+                }
+
+                setDataSource(url)
                 prepareAsync()
+
+                // Timeout de 15 segundos
+                handler.postDelayed({
+                    if (!isPlaying) {
+                        Log.e("AUDIO", "Timeout de preparación")
+                        tvTranslation.text = "Tiempo de espera agotado"
+                        releaseMediaPlayer()
+                    }
+                }, 15000)
+
             } catch (e: Exception) {
-                tvTranslation.text = "Error al reproducir audio"
-                Log.e("AUDIO", "Error: ${e.message}")
+                Log.e("AUDIO", "Excepción: ${e.message}")
+                tvTranslation.text = "Error al reproducir"
+                releaseMediaPlayer()
             }
+        }
+    }
+
+    private fun releaseMediaPlayer() {
+        mediaPlayer?.let {
+            it.release()
+            mediaPlayer = null
+            Log.d("AUDIO", "MediaPlayer liberado")
         }
     }
 
@@ -174,8 +209,8 @@ class Usuario : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        mediaPlayer?.release()
-        mediaPlayer = null
+        handler.removeCallbacksAndMessages(null)
+        releaseMediaPlayer()
     }
 
     data class Palabra(
