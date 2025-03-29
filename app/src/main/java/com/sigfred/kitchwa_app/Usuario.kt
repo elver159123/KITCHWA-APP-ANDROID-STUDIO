@@ -59,30 +59,32 @@ class Usuario : AppCompatActivity() {
             return
         }
 
-        db.collection(coleccion).document(palabra).get()
-            .addOnSuccessListener { document ->
-                if (document.exists()) {
-                    val traducciones = document.get("español") as? List<*>
-                    if (!traducciones.isNullOrEmpty()) {
-                        tvTranslation.text = "Español: ${traducciones.joinToString(", ")}"
-                    } else {
-                        tvTranslation.text = "Traducción no encontrada"
+        db.collection(coleccion).get()
+            .addOnSuccessListener { documents ->
+                val resultados = mutableListOf<String>()
+
+                // Buscar en todos los documentos
+                for (doc in documents) {
+                    // Buscar traducción directa (Kichwa -> Español)
+                    val kichwa = doc.getString("kichwa")?.lowercase()
+                    if (kichwa == palabra) {
+                        val traducciones = doc.get("español") as? List<*> ?: emptyList<Any>()
+                        resultados.add("Español: ${traducciones.joinToString(", ")}")
                     }
-                } else {
-                    db.collection(coleccion).get()
-                        .addOnSuccessListener { documents ->
-                            val resultados = mutableListOf<String>()
-                            for (doc in documents) {
-                                val listaEsp = doc.get("español") as? List<*>
-                                if (listaEsp?.map { it.toString().lowercase() }?.contains(palabra) == true) {
-                                    doc.getString("kichwa")?.let {
-                                        resultados.add("Kichwa: $it")
-                                    }
-                                }
-                            }
-                            tvTranslation.text = if (resultados.isNotEmpty()) resultados.joinToString("\n") else "Traducción no encontrada"
+
+                    // Buscar traducción inversa (Español -> Kichwa)
+                    val espanolList = doc.get("español") as? List<*> ?: emptyList<Any>()
+                    if (espanolList.any { it.toString().lowercase() == palabra }) {
+                        doc.getString("kichwa")?.let {
+                            resultados.add("Kichwa: $it")
                         }
-                        .addOnFailureListener { manejarError(it) }
+                    }
+                }
+
+                tvTranslation.text = if (resultados.isNotEmpty()) {
+                    resultados.joinToString("\n")
+                } else {
+                    "Traducción no encontrada"
                 }
             }
             .addOnFailureListener { manejarError(it) }
@@ -121,20 +123,39 @@ class Usuario : AppCompatActivity() {
             return
         }
 
-        db.collection(coleccion).document(palabra).get()
-            .addOnSuccessListener { document ->
-                if (document.exists()) {
-                    val audioUrl = document.getString("audio_url")
-                    if (!audioUrl.isNullOrEmpty()) {
-                        reproducirDesdeUrl(audioUrl)
-                    } else {
-                        tvTranslation.text = "No hay audio disponible"
+        db.collection(coleccion).get()
+            .addOnSuccessListener { documents ->
+                var audioUrl = ""
+                var palabraKichwa = ""
+
+                for (doc in documents) {
+                    // Buscar por palabra en Kichwa
+                    val kichwa = doc.getString("kichwa")?.lowercase() ?: ""
+                    if (kichwa == palabra) {
+                        audioUrl = doc.getString("audio_url") ?: ""
+                        palabraKichwa = kichwa
+                        break
                     }
+
+                    // Buscar por palabra en Español
+                    val espanol = doc.get("español") as? List<String> ?: emptyList()
+                    if (espanol.any { it.lowercase() == palabra }) {
+                        audioUrl = doc.getString("audio_url") ?: ""
+                        palabraKichwa = doc.getString("kichwa") ?: ""
+                        break
+                    }
+                }
+
+                if (audioUrl.isNotEmpty()) {
+                    tvTranslation.text = "Reproduciendo: ${palabraKichwa.ifEmpty { palabra }}"
+                    reproducirDesdeUrl(audioUrl)
                 } else {
-                    tvTranslation.text = "No se encontró audio"
+                    tvTranslation.text = "Audio no disponible"
                 }
             }
-            .addOnFailureListener { manejarError(it) }
+            .addOnFailureListener {
+                tvTranslation.text = "Error al buscar audio"
+            }
     }
 
     private fun reproducirDesdeUrl(url: String) {
@@ -156,28 +177,25 @@ class Usuario : AppCompatActivity() {
 
                 setOnPreparedListener { mp ->
                     handler.removeCallbacksAndMessages(null)
-                    tvTranslation.text = "Reproduciendo..."
                     mp.start()
                 }
 
                 setOnErrorListener { _, what, extra ->
                     handler.removeCallbacksAndMessages(null)
                     Log.e("AUDIO", "Error: $what/$extra")
-                    tvTranslation.text = "Error de audio ($what/$extra)"
+                    tvTranslation.text = "Error de audio"
                     releaseMediaPlayer()
                     true
                 }
 
                 setOnCompletionListener {
                     handler.removeCallbacksAndMessages(null)
-                    tvTranslation.text = "Reproducción completada"
                     releaseMediaPlayer()
                 }
 
                 setDataSource(url)
                 prepareAsync()
 
-                // Timeout de 15 segundos
                 handler.postDelayed({
                     if (!isPlaying) {
                         Log.e("AUDIO", "Timeout de preparación")
