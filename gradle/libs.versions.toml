@@ -3,6 +3,7 @@ agp = "8.8.2"
 constraintlayoutVersion = "2.1.4"
 firebaseAuth = "23.2.0"
 firebaseAuthVersion = "22.0.0"
+googlePlayServicesAuth = "20.7.0"
 integrity = "1.4.0"
 kotlin = "2.1.0"
 coreKtx = "1.15.0"
@@ -46,6 +47,7 @@ firebaseStorage = {group="com.google.firebase" , name = "firebase-storage", vers
 androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "coreSplashscreen" }
 play-services-auth = { module = "com.google.android.gms:play-services-auth", version.ref = "playServicesAuth" }
 firebaseAnalytics = {group="com.google.firebase", name = "firebase-analytics", version.ref="firebaseAnalyticsV"}
+play-services-auth-v2070 = { module = "com.google.android.gms:play-services-auth", version.ref = "googlePlayServicesAuth" }
 play-services-auth-v2111 = { module = "com.google.android.gms:play-services-auth", version.ref = "playServicesAuthVersion" }
 play-services-safetynet = { module = "com.google.android.gms:play-services-safetynet", version.ref = "playServicesSafetynet" }
 

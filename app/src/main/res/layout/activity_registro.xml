@@ -5,10 +5,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Registro"
-    tools:layout_editor_absoluteX="0dp"
-    tools:layout_editor_absoluteY="40dp">
-
+    android:padding="16dp"
+    tools:context=".Registro">
 
     <TextView
         android:id="@+id/tvRegisterTitle"
@@ -17,7 +15,7 @@
         android:layout_marginTop="56dp"
         android:text="Registro de Usuario"
         android:textColor="#8f2681"
-        android:textSize="32dp"
+        android:textSize="32sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.454"

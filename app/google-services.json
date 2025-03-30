@@ -12,7 +12,20 @@
           "package_name": "com.sigfred.kitchwa_app"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "885216348340-m4qd7vnie71mv79hlvhgn50s7auv5rnf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sigfred.kitchwa_app",
+            "certificate_hash": "9f721dde88643e1c7b71e1aa3f319144072dab95"
+          }
+        },
+        {
+          "client_id": "885216348340-o2chs9vi6tpomq8ou8bcrilk0pdet2uu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyAZDbv9z0q3FfHTphHS1WlebU02p27myyo"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "885216348340-o2chs9vi6tpomq8ou8bcrilk0pdet2uu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
