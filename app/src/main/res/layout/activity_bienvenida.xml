@@ -29,20 +29,20 @@
 
     <ImageView
         android:id="@+id/ivLogo"
-        android:layout_width="344dp"
-        android:layout_height="327dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="253dp"
+        android:layout_height="217dp"
+        android:layout_marginTop="28dp"
         android:src="@drawable/logo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintHorizontal_bias="0.459"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvAppName" />
 
     <TextView
         android:id="@+id/tvAppName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="220dp"
+        android:layout_width="279dp"
+        android:layout_height="69dp"
+        android:layout_marginTop="304dp"
         android:fontFamily="cursive"
         android:text="KITCHWA APP"
         android:textSize="40sp"
@@ -67,19 +67,19 @@ android:layout_marginTop="20dp"
 app:layout_constraintHorizontal_bias="0.502"/>
 
     <!-- TextView - Texto adicional -->
-<TextView
-android:id="@+id/textView4"
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:text="ALLIN HAMUSQA KAY"
-android:textSize="32sp"
-android:textStyle="bold"
-android:fontFamily="cursive"
-app:layout_constraintTop_toBottomOf="@id/tvWelcome"
-app:layout_constraintEnd_toEndOf="parent"
-app:layout_constraintStart_toStartOf="parent"
-app:layout_constraintBottom_toTopOf="@id/view"
-app:layout_constraintVertical_bias="0.198"/>
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="329dp"
+        android:layout_height="59dp"
+        android:fontFamily="cursive"
+        android:text="ALLIN HAMUSQA KAY"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvWelcome"
+        app:layout_constraintVertical_bias="0.198" />
 
     <!-- Vista de fondo -->
 <View
