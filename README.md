@@ -26,7 +26,7 @@ Aplicación móvil para traducir palabras entre **español** y **kichwa**, integ
 ## 🖼️ Capturas de Pantalla  
 | **Inicio de Sesión** | **Traducción** | **Lista de Palabras** |  
 |-----------------------|----------------|-----------------------|  
-| (/imagenes/Image.png) width="200"> | <img src="/imagenes/Imagen2.png" width="200"> | <img src="/imagenes/Imagen3.png" width="200"> |  
+| ![Pantalla de inicio](/imagenes/Image.png) | <img src="/imagenes/Imagen2.png" width="200"> | <img src="/imagenes/Imagen3.png" width="200"> |  
 
 ---
 
