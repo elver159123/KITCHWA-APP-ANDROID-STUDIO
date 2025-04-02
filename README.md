@@ -46,7 +46,7 @@ Aplicación móvil para traducir palabras entre **español** y **kichwa**, integ
 
 ### Pasos  
 1. **Descargar el APK:**  
-   - Ve a la [sección de releases](https://github.com/tu_usuario/tu_repositorio/releases) y descarga `app-release.apk`.  
+   - Ve a la [sección de releases](https://github.com/elver159123/KITCHWA-APP-ANDROID-STUDIO/blob/master/apk/kitchwa.apk) y descarga `kitchwa.apk`.  
 2. **Habilitar "Orígenes desconocidos":**  
    - *Ajustes → Seguridad → Instalar aplicaciones desconocidas → Permitir desde el navegador o gestor de archivos.*  
 3. **Instalar:**  
@@ -59,4 +59,4 @@ Aplicación móvil para traducir palabras entre **español** y **kichwa**, integ
 ## 🔧 Configuración para Desarrolladores  
 ### Clonar el Repositorio  
 ```bash
-git clone https://github.com/tu_usuario/tu_repositorio.git
+https://github.com/elver159123/KITCHWA-APP-ANDROID-STUDIO/
