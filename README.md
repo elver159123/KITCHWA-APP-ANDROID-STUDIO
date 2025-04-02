@@ -9,7 +9,7 @@ Aplicación móvil para traducir palabras entre **español** y **kichwa**, integ
 ---
 
 ## 📲 Descargar APK  
-- **Enlace directo:** [app-release.apk](https://github.com/tu_usuario/tu_repositorio/releases)  
+- **Enlace directo:** [app-release.apk](https://github.com/elver159123/KITCHWA-APP-ANDROID-STUDIO/blob/master/apk/kitchwa.apk)  
 - **Guía de instalación:** [Ver instrucciones](#-instalación)  
 
 ---
