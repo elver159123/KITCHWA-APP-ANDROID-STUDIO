@@ -55,8 +55,23 @@ Aplicación móvil para traducir palabras entre **español** y **kichwa**, integ
    - Busca el ícono **Kitchwa App** en el menú principal.  
 
 ---
+## 👨‍💻 Equipo Técnico de Desarrollo
+### Este proyecto ha sido desarrollado por:
 
+👨‍💻 Andy Yanacallo
+👨‍💻 Luis Puertas
+👨‍💻 David Flores
+
+🎖️ Mención especial a Sara Toalombo por su valiosa colaboración.
+
+---
+## Visita nuestra página web en el siguiente enlace
+
+-- https://www.kichwapp.america3000.site/
+---
 ## 🔧 Configuración para Desarrolladores  
 ### Clonar el Repositorio  
 ```bash
 https://github.com/elver159123/KITCHWA-APP-ANDROID-STUDIO/
+
+
